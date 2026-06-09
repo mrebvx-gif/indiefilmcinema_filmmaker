@@ -27,7 +27,7 @@ export const FilmSubmissionSchema = z.object({
   writerName: z.string().max(255).optional().nullable(),
   cinematographerName: z.string().max(255).optional().nullable(),
   marketInterests: z.array(z.enum(MARKET_INTERESTS)).default([]),
-  narrativeScale: z.number().int().min(1).max(7),
+  narrativeScale: z.coerce.number().int().min(1).max(7),
   posterBunnyUrl: z.string().url().optional().nullable(),
   posterBunnyObject: z.string().optional().nullable(),
   thumbnailBunnyUrl: z.string().url('Thumbnail is required'),
