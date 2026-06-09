@@ -1,0 +1,112 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+model User {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email           String    @unique @db.VarChar(255)
+  passwordHash    String    @db.VarChar(255)
+  fullName        String    @db.VarChar(255)
+  isEmailVerified Boolean   @default(false)
+  isSuspended     Boolean   @default(false)
+  createdAt       DateTime  @default(now()) @db.Timestamptz
+  updatedAt       DateTime  @updatedAt @db.Timestamptz
+
+  subscription          Subscription?
+  emailVerifyTokens     EmailVerificationToken[]
+  passwordResetTokens   PasswordResetToken[]
+  filmSubmissions       FilmSubmission[]
+
+  @@map("users")
+}
+
+model Subscription {
+  id                String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId            String    @unique @db.Uuid
+  lsSubscriptionId  String    @unique @db.VarChar(255)
+  lsCustomerId      String    @db.VarChar(255)
+  lsVariantId       String?   @db.VarChar(255)
+  status            String    @db.VarChar(20)   // PENDING|ACTIVE|PAST_DUE|CANCELLED|EXPIRED
+  currentPeriodEnd  DateTime? @db.Timestamptz
+  cancelledAt       DateTime? @db.Timestamptz
+  createdAt         DateTime  @default(now()) @db.Timestamptz
+  updatedAt         DateTime  @updatedAt @db.Timestamptz
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("subscriptions")
+}
+
+model EmailVerificationToken {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId    String    @db.Uuid
+  token     String    @unique @db.VarChar(255)
+  expiresAt DateTime  @db.Timestamptz
+  usedAt    DateTime? @db.Timestamptz
+  createdAt DateTime  @default(now()) @db.Timestamptz
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@map("email_verification_tokens")
+}
+
+model PasswordResetToken {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId    String    @db.Uuid
+  token     String    @unique @db.VarChar(255)
+  expiresAt DateTime  @db.Timestamptz
+  usedAt    DateTime? @db.Timestamptz
+  createdAt DateTime  @default(now()) @db.Timestamptz
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@map("password_reset_tokens")
+}
+
+model FilmSubmission {
+  id                  String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  filmakerId          String    @db.Uuid
+  status              String    @default("SUBMITTED") @db.VarChar(20)
+
+  // Film Details
+  filmTitle           String    @db.VarChar(500)
+  logline             String    @db.Text
+  runningTimeSeconds  Int
+  primaryGenre        String    @db.VarChar(100)
+  countryOfOrigin     String    @db.VarChar(100)
+  targetCountries     String[]  @default([])
+  targetReleaseYear   Int?      @db.SmallInt
+
+  // Cast & Crew
+  directorName        String    @db.VarChar(255)
+  producerName        String?   @db.VarChar(255)
+  writerName          String?   @db.VarChar(255)
+  cinematographerName String?   @db.VarChar(255)
+
+  // Market & Distribution
+  marketInterests     String[]  @default([])
+  narrativeScale      Int       @db.SmallInt
+
+  // Files
+  posterBunnyUrl      String?   @db.VarChar(1000)
+  posterBunnyObject   String?   @db.VarChar(500)
+  thumbnailBunnyUrl   String    @db.VarChar(1000)
+  thumbnailBunnyObject String   @db.VarChar(500)
+  youtubeTrailerUrl   String    @db.VarChar(500)
+  videoBunnyVideoId   String    @db.VarChar(255)
+  videoBunnyLibraryId String    @db.VarChar(255)
+
+  submittedAt         DateTime  @default(now()) @db.Timestamptz
+
+  filmmaker User @relation(fields: [filmakerId], references: [id])
+
+  @@index([filmakerId])
+  @@map("film_submissions")
+}
