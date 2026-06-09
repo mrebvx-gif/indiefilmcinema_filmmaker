@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { FilmSubmissionSchema, FilmSubmissionInput, GENRES } from '@/lib/validations/films'
+import { FilmSubmissionSchema, FilmSubmissionInput, GENRES, MARKET_INTERESTS } from '@/lib/validations/films'
 import { authFetch } from '@/lib/auth-client'
 import { useUploader } from '@/hooks/useUploader'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
@@ -203,9 +203,64 @@ export default function SubmitPage() {
               </div>
             </div>
 
-            {/* 3. Media & Assets */}
+            {/* 3. Market & Distribution */}
             <div className="space-y-6 pt-4">
-              <h3 className="text-2xl font-semibold border-b border-border/50 pb-2 text-foreground/90">3. Media & Assets</h3>
+              <h3 className="text-2xl font-semibold border-b border-border/50 pb-2 text-foreground/90">3. Market & Distribution</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Target Release Year</label>
+                  <Input type="number" {...register('targetReleaseYear', { setValueAs: (v) => v === '' || Number.isNaN(Number(v)) ? null : Number(v) })} placeholder="e.g. 2026" className={`h-12 bg-background/50 ${errors.targetReleaseYear ? 'border-destructive ring-destructive/20' : ''}`} />
+                  {errors.targetReleaseYear && <p className="text-xs text-destructive">{errors.targetReleaseYear.message}</p>}
+                </div>
+                
+                <div className="space-y-3">
+                  <label className="text-sm font-medium">Narrative Scale (1-7) <span className="text-destructive">*</span></label>
+                  <p className="text-xs text-muted-foreground">1 = Highly Traditional, 7 = Highly Experimental</p>
+                  <div className="flex justify-between items-center bg-background/50 p-3 rounded-md border border-input">
+                    {[1, 2, 3, 4, 5, 6, 7].map(num => (
+                      <label key={num} className="flex flex-col items-center gap-1 cursor-pointer">
+                        <span className="text-xs font-medium">{num}</span>
+                        <input type="radio" value={num} {...register('narrativeScale', { valueAsNumber: true })} className="w-4 h-4 accent-primary" />
+                      </label>
+                    ))}
+                  </div>
+                  {errors.narrativeScale && <p className="text-xs text-destructive">{errors.narrativeScale.message}</p>}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-3">
+                  <label className="text-sm font-medium">Target Countries</label>
+                  <p className="text-xs text-muted-foreground">Where would you like to show your film?</p>
+                  <div className="space-y-2 bg-background/50 p-4 rounded-md border border-input">
+                    {['Worldwide', 'USA', 'UK', 'Europe', 'Asia', 'Canada'].map(country => (
+                      <label key={country} className="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" value={country} {...register('targetCountries')} className="w-4 h-4 rounded border-gray-300 text-primary accent-primary" />
+                        <span className="text-sm">{country}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <label className="text-sm font-medium">Market Interests</label>
+                  <p className="text-xs text-muted-foreground">Select all potential markets</p>
+                  <div className="space-y-2 bg-background/50 p-4 rounded-md border border-input">
+                    {MARKET_INTERESTS.map(interest => (
+                      <label key={interest} className="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" value={interest} {...register('marketInterests')} className="w-4 h-4 rounded border-gray-300 text-primary accent-primary" />
+                        <span className="text-sm">{interest.replace(/_/g, ' ')}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 4. Media & Assets */}
+            <div className="space-y-6 pt-4">
+              <h3 className="text-2xl font-semibold border-b border-border/50 pb-2 text-foreground/90">4. Media & Assets</h3>
               
               <div className="space-y-2">
                 <label className="text-sm font-medium">YouTube Trailer URL <span className="text-destructive">*</span></label>
