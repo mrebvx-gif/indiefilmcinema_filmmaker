@@ -9,7 +9,7 @@ export const config = {
 }
 
 // Stub — implemented fully in Phase 2
-export async function middleware(_request: NextRequest) {
+export async function proxy(_request: NextRequest) {
   // Phase 2 will add: JWT check + subscription status check
   return NextResponse.next()
 }
