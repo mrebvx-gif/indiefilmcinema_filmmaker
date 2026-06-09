@@ -62,7 +62,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="container max-w-7xl py-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
+    <div className="container mx-auto max-w-7xl py-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
         <div>
           <h1 className="text-4xl font-bold tracking-tight text-foreground">Your Filmmaker Portal</h1>

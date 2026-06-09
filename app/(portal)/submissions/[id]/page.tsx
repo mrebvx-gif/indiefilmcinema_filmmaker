@@ -73,7 +73,7 @@ export default function SubmissionDetailPage() {
   }
 
   return (
-    <div className="container max-w-5xl py-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
+    <div className="container mx-auto max-w-5xl py-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
       <Link href="/dashboard" className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors mb-8">
         <ArrowLeft className="w-4 h-4 mr-2" /> Back to Dashboard
       </Link>

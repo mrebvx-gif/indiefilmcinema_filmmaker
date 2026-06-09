@@ -123,7 +123,7 @@ export default function SubmitPage() {
   }
 
   return (
-    <div className="container max-w-4xl py-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
+    <div className="container mx-auto max-w-4xl py-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
       <Card className="bg-card/40 backdrop-blur-xl border-border/50 shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/50 via-accent/50 to-primary/50" />
         

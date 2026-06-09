@@ -143,7 +143,7 @@ function LoginForm() {
 
             <Button 
               type="submit" 
-              className="w-full mt-6 bg-foreground text-background hover:bg-foreground/90 transition-all duration-300"
+              className="w-full mt-6 bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-all duration-300"
               disabled={loading}
             >
               {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
