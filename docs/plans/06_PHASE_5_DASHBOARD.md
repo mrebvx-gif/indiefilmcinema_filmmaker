@@ -132,12 +132,12 @@ Requirements:
 
 ## Phase 5 Verification Checklist
 
-- [ ] `/dashboard` lists all films submitted by the current user.
-- [ ] Users cannot see films submitted by other accounts.
-- [ ] "Upload New Film" routes to `/submit`.
-- [ ] Clicking "Manage Billing" opens the Lemon Squeezy customer portal.
-- [ ] Clicking a film routes to `/submissions/[id]` and displays all metadata correctly.
-- [ ] Attempting to access `/submissions/[id]` for a film owned by another user returns an error or 404.
+- [x] `/dashboard` lists all films submitted by the current user.
+- [x] Users cannot see films submitted by other accounts.
+- [x] "Upload New Film" routes to `/submit`.
+- [x] Clicking "Manage Billing" opens the Lemon Squeezy customer portal.
+- [x] Clicking a film routes to `/submissions/[id]` and displays all metadata correctly.
+- [x] Attempting to access `/submissions/[id]` for a film owned by another user returns an error or 404.
 
 ---
 

@@ -72,3 +72,31 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
+
+export async function GET(request: NextRequest) {
+  try {
+    const user = await getAuthUser(request)
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const submissions = await db.filmSubmission.findMany({
+      where: { filmakerId: user.userId },
+      orderBy: { submittedAt: 'desc' },
+      select: {
+        id: true,
+        filmTitle: true,
+        primaryGenre: true,
+        status: true,
+        submittedAt: true,
+        thumbnailBunnyUrl: true,
+        runningTimeSeconds: true,
+      }
+    })
+
+    return NextResponse.json(submissions)
+  } catch (error) {
+    console.error('[FILMS_GET]', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}

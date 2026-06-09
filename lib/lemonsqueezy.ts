@@ -70,16 +70,18 @@ export async function getCustomerPortalUrl(
   lsCustomerId: string
 ): Promise<string> {
   const response = await lsApiFetch(
-    `/customers/${lsCustomerId}/portal-url`,
+    `/customers/${lsCustomerId}`,
     { method: 'GET' }
   )
 
   if (!response.ok) {
+    const errorText = await response.text()
+    console.error('Failed to fetch customer for portal URL:', errorText)
     throw new Error('Failed to get customer portal URL')
   }
 
   const data = await response.json()
-  return data.meta.urls.customer_portal as string
+  return data.data.attributes.urls.customer_portal as string
 }
 
 export function verifyWebhookSignature(
