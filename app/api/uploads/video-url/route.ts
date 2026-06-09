@@ -23,6 +23,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       bunnyVideoId,
       uploadUrl,
+      bunnyLibraryId: process.env.BUNNY_STREAM_LIBRARY_ID,
       // Provide headers the frontend needs to use for the PUT request
       headers: {
         AccessKey: process.env.BUNNY_STREAM_ACCESS_KEY,

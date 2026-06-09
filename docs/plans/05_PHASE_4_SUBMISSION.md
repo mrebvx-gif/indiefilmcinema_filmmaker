@@ -275,13 +275,13 @@ export default function SubmitSuccessPage() {
 
 ## Phase 4 Verification Checklist
 
-- [ ] A logged in user with an active subscription can access `/submit`.
-- [ ] Attempting to submit without required fields triggers client-side validation errors.
-- [ ] Uploading a video updates the progress bar, reaches 100%, and successfully fetches confirmation.
-- [ ] Uploading a poster/thumbnail shows the image preview immediately.
-- [ ] Clicking Submit successfully calls `POST /api/films` and creates a record in the database.
-- [ ] You are redirected to `/submit/success`.
-- [ ] The filmmaker receives a submission confirmation email.
+- [x] A logged in user with an active subscription can access `/submit`.
+- [x] Attempting to submit without required fields triggers client-side validation errors.
+- [x] Uploading a video updates the progress bar, reaches 100%, and successfully fetches confirmation.
+- [x] Uploading a poster/thumbnail shows the image preview immediately.
+- [x] Clicking Submit successfully calls `POST /api/films` and creates a record in the database.
+- [x] You are redirected to `/submit/success`.
+- [x] The filmmaker receives a submission confirmation email.
 
 ---
 
