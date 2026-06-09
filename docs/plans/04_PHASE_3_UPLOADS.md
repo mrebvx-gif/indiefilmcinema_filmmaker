@@ -240,12 +240,12 @@ export async function POST(request: NextRequest) {
 
 ## Phase 3 Verification Checklist
 
-- [ ] `POST /api/uploads/video-url` returns a `bunnyVideoId` and an `uploadUrl`
-- [ ] You can perform an HTTP PUT to the returned `uploadUrl` with a small video file and headers `AccessKey` and `Content-Type: application/octet-stream`
-- [ ] `POST /api/uploads/confirm-video` returns `{ "success": true }` for the uploaded video ID
-- [ ] `POST /api/uploads/image-url` returns `objectName`, `uploadUrl`, and `publicUrl`
-- [ ] You can perform an HTTP PUT to the returned image `uploadUrl` with an image file and headers `AccessKey` and `Content-Type: application/octet-stream`
-- [ ] Navigating to the `publicUrl` of the uploaded image in your browser displays the image
+- [x] `POST /api/uploads/video-url` returns a `bunnyVideoId` and an `uploadUrl`
+- [x] You can perform an HTTP PUT to the returned `uploadUrl` with a small video file and headers `AccessKey` and `Content-Type: application/octet-stream`
+- [x] `POST /api/uploads/confirm-video` returns `{ "success": true }` for the uploaded video ID
+- [x] `POST /api/uploads/image-url` returns `objectName`, `uploadUrl`, and `publicUrl`
+- [x] You can perform an HTTP PUT to the returned image `uploadUrl` with an image file and headers `AccessKey` and `Content-Type: application/octet-stream`
+- [x] Navigating to the `publicUrl` of the uploaded image in your browser displays the image
 
 ---
 

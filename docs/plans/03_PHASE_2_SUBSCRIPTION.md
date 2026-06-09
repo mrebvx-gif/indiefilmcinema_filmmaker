@@ -601,18 +601,18 @@ Also update `app/api/auth/logout/route.ts` to clear it.
 
 ## Phase 2 Verification Checklist
 
-- [ ] Logging in and visiting `/dashboard` redirects to `/subscribe` when no subscription exists
-- [ ] Clicking "Subscribe Now" redirects to Lemon Squeezy checkout (in test mode)
-- [ ] After completing test payment, Lemon Squeezy sends `subscription_created` webhook
-- [ ] Webhook handler creates a `subscriptions` row with `status = 'ACTIVE'` in the DB
-- [ ] After payment, redirect back to `/dashboard?subscription=success` works
-- [ ] Visiting `/dashboard` no longer redirects to `/subscribe` (subscription is active)
-- [ ] `subscription_payment_failed` webhook → status becomes `PAST_DUE` in DB
-- [ ] `subscription_cancelled` webhook → status becomes `CANCELLED` in DB
-- [ ] Welcome email received after subscription activated
-- [ ] Payment failed email received after `subscription_payment_failed`
-- [ ] `/api/webhooks/lemon-squeezy` returns 401 when called with invalid/no signature
-- [ ] `npx tsc --noEmit` passes
+- [x] Logging in and visiting `/dashboard` redirects to `/subscribe` when no subscription exists
+- [x] Clicking "Subscribe Now" redirects to Lemon Squeezy checkout (in test mode)
+- [x] After completing test payment, Lemon Squeezy sends `subscription_created` webhook
+- [x] Webhook handler creates a `subscriptions` row with `status = 'ACTIVE'` in the DB
+- [x] After payment, redirect back to `/dashboard?subscription=success` works
+- [x] Visiting `/dashboard` no longer redirects to `/subscribe` (subscription is active)
+- [x] `subscription_payment_failed` webhook → status becomes `PAST_DUE` in DB
+- [x] `subscription_cancelled` webhook → status becomes `CANCELLED` in DB
+- [x] Welcome email received after subscription activated
+- [x] Payment failed email received after `subscription_payment_failed`
+- [x] `/api/webhooks/lemon-squeezy` returns 401 when called with invalid/no signature
+- [x] `npx tsc --noEmit` passes
 
 ---
 

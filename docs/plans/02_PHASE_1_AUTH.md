@@ -722,22 +722,22 @@ export default function DashboardPage() {
 
 ## Phase 1 Verification Checklist
 
-- [ ] `POST /api/auth/register` with valid data creates a user in the DB and sends a verification email
-- [ ] `POST /api/auth/register` with duplicate email returns 409
-- [ ] `POST /api/auth/register` with weak password returns 400 with validation details
-- [ ] Clicking the verification link in the email sets `is_email_verified = true` in the DB and redirects to `/login?verified=true`
-- [ ] `POST /api/auth/login` with unverified email returns 403 with `code: EMAIL_NOT_VERIFIED`
-- [ ] `POST /api/auth/login` with correct credentials returns `accessToken` and sets `refresh_token` cookie
-- [ ] `POST /api/auth/login` with wrong password returns generic 401
-- [ ] `POST /api/auth/refresh` with valid cookie returns new `accessToken`
-- [ ] `POST /api/auth/logout` clears the cookie
-- [ ] `POST /api/auth/forgot-password` always returns 200 regardless of email existence
-- [ ] `POST /api/auth/reset-password` with valid token updates the password
-- [ ] `POST /api/auth/reset-password` with expired/used token returns 400
-- [ ] Register page → shows "Check your email" on success
-- [ ] Login page → shows `/login?verified=true` banner when landing from verification
-- [ ] Login page → redirects to `/dashboard` on success
-- [ ] `npx tsc --noEmit` passes
+- [x] `POST /api/auth/register` with valid data creates a user in the DB and sends a verification email
+- [x] `POST /api/auth/register` with duplicate email returns 409
+- [x] `POST /api/auth/register` with weak password returns 400 with validation details
+- [x] Clicking the verification link in the email sets `is_email_verified = true` in the DB and redirects to `/login?verified=true`
+- [x] `POST /api/auth/login` with unverified email returns 403 with `code: EMAIL_NOT_VERIFIED`
+- [x] `POST /api/auth/login` with correct credentials returns `accessToken` and sets `refresh_token` cookie
+- [x] `POST /api/auth/login` with wrong password returns generic 401
+- [x] `POST /api/auth/refresh` with valid cookie returns new `accessToken`
+- [x] `POST /api/auth/logout` clears the cookie
+- [x] `POST /api/auth/forgot-password` always returns 200 regardless of email existence
+- [x] `POST /api/auth/reset-password` with valid token updates the password
+- [x] `POST /api/auth/reset-password` with expired/used token returns 400
+- [x] Register page → shows "Check your email" on success
+- [x] Login page → shows `/login?verified=true` banner when landing from verification
+- [x] Login page → redirects to `/dashboard` on success
+- [x] `npx tsc --noEmit` passes
 
 ---
 

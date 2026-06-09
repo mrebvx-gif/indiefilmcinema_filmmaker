@@ -38,6 +38,14 @@ export async function POST(request: NextRequest) {
       path: '/',
     })
 
+    // Also set access token in a regular cookie for middleware
+    response.cookies.set('access_token', newAccessToken, {
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 60 * 15, // 15 minutes
+      path: '/',
+    })
+
     return response
   } catch (error) {
     console.error('[AUTH_REFRESH]', error)
