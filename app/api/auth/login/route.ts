@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { rateLimit } from '@/lib/rate-limit'
 import { db } from '@/lib/db'
 import { verifyPassword } from '@/lib/password'
 import {
@@ -9,6 +10,13 @@ import { LoginSchema } from '@/lib/validations/auth'
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limit check
+    const ip = request.headers.get("x-forwarded-for") || "127.0.0.1"
+    const { success } = await rateLimit.limit(ip)
+    if (!success) {
+      return NextResponse.json({ error: "Too many requests" }, { status: 429 })
+    }
+
     const body = await request.json()
     const result = LoginSchema.safeParse(body)
     if (!result.success) {
