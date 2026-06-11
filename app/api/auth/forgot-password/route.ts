@@ -33,7 +33,9 @@ export async function POST(request: NextRequest) {
           expiresAt: new Date(Date.now() + 60 * 60 * 1000), // 1 hour
         },
       })
-      sendPasswordResetEmail(email, token).catch(console.error)
+      await sendPasswordResetEmail(email, token).catch((err) => {
+        console.error('[EMAIL_SEND_ERROR]', err)
+      })
     }
 
     return NextResponse.json({ message: 'If that email exists, a reset link was sent.' })

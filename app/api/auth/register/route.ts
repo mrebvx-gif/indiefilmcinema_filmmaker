@@ -52,8 +52,10 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    // Send email (don't await — don't fail registration if email fails)
-    sendVerificationEmail(email, token).catch(console.error)
+    // Send email (await so serverless function doesn't freeze, but catch error so it doesn't fail registration)
+    await sendVerificationEmail(email, token).catch((err) => {
+      console.error('[EMAIL_SEND_ERROR]', err)
+    })
 
     return NextResponse.json(
       { message: 'Account created. Please check your email to verify your account.' },
