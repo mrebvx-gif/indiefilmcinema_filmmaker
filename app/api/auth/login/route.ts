@@ -73,6 +73,22 @@ export async function POST(request: NextRequest) {
       path: '/',
     })
 
+    // Check subscription status to prepopulate fast-path cookie
+    const subscription = await db.subscription.findUnique({
+      where: { userId: user.id },
+      select: { status: true },
+    })
+
+    if (subscription?.status === 'ACTIVE') {
+      response.cookies.set('auth_subscription_active', 'true', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7, // 1 week
+      })
+    }
+
     return response
   } catch (error) {
     console.error('[AUTH_LOGIN]', error)
