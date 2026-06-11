@@ -41,6 +41,7 @@ export async function proxy(request: NextRequest) {
     const statusUrl = new URL('/api/subscriptions/status', request.url)
     const statusResponse = await fetch(statusUrl, {
       headers: { Authorization: `Bearer ${token}` },
+      cache: 'no-store',
     })
 
     if (statusResponse.ok) {
